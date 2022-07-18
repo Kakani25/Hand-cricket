@@ -9,14 +9,17 @@
  #include<time.h>
  using namespace std;
 
- int l=1,counta=3,countb=2,countc=1;
+ int l=3;
 
- int z,us=0,cs=0,flag=0;
+ int z,us=0,cs=0;
+   int cbat(int cs);
+   int cbowl(int us);
    void bat();
    void bowl();
 
    void play()
 	    {
+
 
 		start :
 
@@ -27,7 +30,7 @@
 
 		system("cls");
 
-		char yn,bl,toss,name[30];
+		char yn='\0',bl='\0',toss='\0';
 		int random;
 		 srand (time(NULL));
 		cout<<"\n\n\t\tSingle Player.....\n\n\n\tTOSS\n\t~~~~"
@@ -77,9 +80,14 @@
 		      }
 
 		 if((i%11)==0)
-		  cout<<'\n';
+		  {
+          cout<<'\n';
+
+		  }
 		  delay(50);
+
 		  i++;
+
 
          }
 
@@ -91,43 +99,51 @@
 
         }*/
 
-           int us=0,cs=0,flag=0;
-		  redo :
+
+
 		switch(random)
 		{
 		case 0 :
 		   if(toss=='H')
 		   {
-		     cout<<"\nYou Won The Toss !!\n\n\n"
-			 <<"Batting Or Bowling ? \n\nEnter B / L : ";
+		     cout<<"\n\nYou Won The Toss !!\n\n\n";
+        redo:
+			 cout<<"Batting Or Bowling ? \n\nEnter B / L : ";
 			cin>>bl;
 		    bl=toupper(bl);
 
 			  cout<<bl;
 
 			if(bl=='B')
-			{bat();
+			{
+			    bat();
+			    break;
+
 			}
 
 			else
 			if(bl=='L')
 			   {
-
-			    bowl();}
+			       bowl();
+			       break;
+		       }
 
 			else
 			{
-			 cout<<"\n\nPlease Enter Correct Option : ";
-			 cout<<"/a";
-			 delay(750);
+			    system("cls");
+			    cout<<"\a";
+
+
+			 cout<<"\nPlease Enter Correct Option\n\n";
+
 			 //nosound();
-			 toss='H';
+			 //toss='H';
 			 goto redo;
 				  }
 			}
 
 	     else
-	      if(toss=='T')
+	      //if(toss=='T')
 	      {
 	       cout<<"\n\nComputer Wins The Toss !! \n\n";
 		switch(random)
@@ -135,6 +151,7 @@
 		   case 0 : {cout<<"\n\nComputer Chose To Bat ! ";
 		    //getch();
 		    bowl();
+
 		     break;}
 
 		   case 1 :
@@ -144,40 +161,52 @@
 			    break;}
 
 		 }
-		   } break;
+            } break;
+
+
 
 		 case 1 :
 
 
 		      if(toss=='T')
 			  {
-		     cout<<"\nYou Won The Toss !!\n\n\n"
-			 <<"Batting Or Bowling ? \n\nEnter B / L : ";
-			    cin>>toss;
-		    toss=toupper(toss);
+		     cout<<"\n\nYou Won The Toss !!\n\n\n";
+        goback:
+			 cout<<"Batting Or Bowling ? \n\nEnter B / L : ";
+			    cin>>bl;
+		    bl=toupper(bl);
 
-			    cout<<toss;
+			    cout<<bl;
 
 			if(bl=='B')
-			  bat();
+			  {
+			      bat();
+			      break;
+              }
 
 		    else
 			if(bl=='L')
-			bowl();
+			{
+			    bowl();
+			    break;
+			 }
 
 		    else
 			{
-			 cout<<"\n\nPlease Enter Correct Option : ";
-			 cout<<"\a";
-			delay(750);
+             system("cls");
+              cout<<"\a";
+
+			 cout<<"\nPlease Enter Correct Option\n\n";
+
+
 			//nosound();
-			toss='H';
-			goto redo;
+			//toss='H';
+			goto goback;
 			 }
 			 }
 
 		    else
-			 if(toss=='H')
+			 //if(toss=='H')
 			{
 			cout<<"\n\nComputer Wins The Toss !! \n\n";
 
@@ -189,18 +218,21 @@
 			 cout<<"\n\nComputer Choose To Bat ! ";
 				//getch();
 				bowl();
+
 				break;}
 
 		case 1 :
 			 {cout<<"\n\nComputer Choose To Bowl ! ";
 			      //getch();
 			      bat();
+
+
 			      break;}
 			}
 				}  break;
 		}
 
-		if(us>cs)
+		/*(if(us>cs)
 		{
 		cout<<"\n\n\t\t\t*** You Win !! ***";
 			}
@@ -208,34 +240,59 @@
 		else
 		if(cs>us)
 		  {
-		  cout<<"\n\n\t\t\t***Computer Win !! ***";
-			 }
+		  cout<<"\n\n\t\t\t***Computer Wins !! ***";
+			 }*/
 
-		else
+		if(us==cs)
 		 {
-		 cout<<"\n\n\t\t\t***Match TIED";
-		}
-
-		cout<<"\n\nDo You Want To Play Again ?"
+		 cout<<"\a\n\n\t\t\t*** Match TIED !! ***";
+		 delay(4000);
+		 }
+     askagain:
+        system("cls");
+		cout<<"\nDo You Want To Play Again ?"
 		    <<" \n\nEnter Y / N : ";
 		cin>>yn;
-		    yn=toupper(yn);
+        yn=toupper(yn);
 
 		if(yn=='N')
-		{
-		  cout<<"\n\nThankYou For Playing This Game !!";
-		delay(2000);
+		{ system("cls");
+		  cout<<"\n\n\t\t*** \aThank You For Playing This Game !! ***\n";
+		delay(4000);
+		system("cls");
 		 }
 
-		else
-		 goto start;
+        else
+        if(yn!='Y'&&yn!='N')
+        {
+            system("cls");
+              cout<<"\a";
 
-		 getch();
+			 cout<<"\nPlease Enter Correct Option\n\n";
+
+
+			//nosound();
+			//toss='H';
+			goto askagain;
+
+        }
+
+
+
+		else
+        {
+         goto start;
+        }
+
+		 //getch();
 		   }
 
-    void bat()
-{   flag=0,us=0;
-    cout<<"\n\n\n\nUser Batting !\n\n";
+void bat()
+{   //flag=0;
+    delay(2000);
+    us=0,cs=0;
+    system("cls");
+    cout<<"\n\n\t\t\tUser Batting !";
     delay(2000);
    if(l==1)
   {us=10;
@@ -257,10 +314,18 @@ do
 cout<<"\n\nEnter Shot 1 to 4 and 6 : ";
 u=getche();
 u-=48;
+//cout<<endl;
 
-if((u>6)||(u==0)||(u==5))
+
+if(u==(-21))
 {
-cout<<"\aInvalid Shot ! ";
+cout<<"\a\nIInvalid Shot ! ";
+continue;
+}
+else
+    if((u>6)||(u<=0)||(u==5))
+{
+cout<<"\a\nInvalid Shot ! ";
 continue;
 }
 c=rand()%5;
@@ -275,40 +340,49 @@ case 4 : c=6 ;break;
 if(u!=c)
 {
 us+=u;
-cout<<"\nYou score "<<u<<" Runs ";
+cout<<"\n\nYou score "<<u<<" Runs ";
 }
 else
 {
 cout<<"\n\nYou Are OUT \n\nYou Have "<<us<<" Runs ! ";
+//flag=1;
+cout<<"\n\nComputer Needs "<<(us-cs)+1<<" Runs To Win ! \n\n";
+cbowl(us);
 }
 
 
 //getch();
-if(flag!=0)
+/*if(flag!=0)
 {
 if(us>cs)
 {
 cout<<"\n\n\nYou Win !!";
 break;
 }
-cout<<"\n\nYou Need "<<(cs-us)+1<<" Runs To Win ! ";
+else{
+    cout<<"\n\nComputer Wins!!!!";
 }
+//cout<<"\n\nYou Need "<<(cs-us)+1<<" Runs To Win ! ";
+}*/
 }while(u!=c);
-if(flag==0)
+/*if(flag==0)
 {
 flag=1;
 bowl();
-}
+}*/
 
 }
+
 
 void bowl()
 {
-    cout<<"\n\n\n\nUser Bowling !\n\n";
-  flag=0,cs=0;
+  delay(2000);
+  system("cls");
+  cout<<"\n\n\t\t\tUser Bowling !";
+  us=0,cs=0;
 //textcolor(2);
 
-delay(4000);
+delay(2000);
 system("cls");
 
  srand (time(NULL));
@@ -317,14 +391,21 @@ int u=0,c=0;
 
 do
 {
-
 cout<<"\n\nEnter Style 1 to 4 and 6 : ";
 u=getche();
 u-=48;
+//cout<<endl;
 
-if((u>6)||(u==0)||(u==5))
+
+if(u==(-21))
 {
-cout<<"\aInvalid Style ! ";
+cout<<"\a\nIInvalid Shot ! ";
+continue;
+}
+else
+    if((u>6)||(u<=0)||(u==5))
+{
+cout<<"\a\nInvalid Shot ! ";
 continue;
 }
 c=rand()%5;
@@ -340,61 +421,252 @@ if(u!=c)
 {
 //cout<<c<<" "<<cs;
 cs+=c;
-cout<<"\nComputer scores "<<c<<" Runs ";
+cout<<"\n\nComputer scores "<<c<<" Runs ";
 }
 else
 {
-cout<<"\n\nYou Have Bowled Out The Computer \n\nComputer Have "<<cs<<" Runs ! ";
+  //flag=1;
+  cout<<"\n\nYou Have Bowled Out The Computer \n\nComputer Have "<<cs<<" Runs ! ";
+  cout<<"\n\nYou Need "<<(cs-us)+1<<" Runs To Win ! ";
+  cbat(cs);
 }
-if(flag!=0)
+/*if(flag!=0)
 {
 if((cs>us))
 {
 cout<<"\n\n\nComputer Wins !! ";
 break;
 }
-cout<<"\n\nComputer Needs "<<(us-cs)+1<<" Runs To Win ! \n\n";
-}
+//cout<<"\n\nComputer Needs "<<(us-cs)+1<<" Runs To Win ! \n\n";
+}*/
 }while(u!=c);
 //getch();
 
-if(flag==0)
+/*if(flag==0)
 {
 flag=1;
 bat();
-}
+}*/
 
 }
 
+int cbat(int cs)
+{  // flag=0;
+    delay(2000);
+    system("cls");
+    cout<<"\n\n\t\t\tUser Batting !";
+    delay(2000);
+   /*if(l==1)
+  {us=10;
+   }
+  else if(l==2)
+  {us=5;
+   }
+  else
+  { us=0;
+  } */
+//textcolor(5);
+system("cls");
+ srand (time(NULL));
+
+int u=0,c=0;
+do
+{
+
+cout<<"\n\nEnter Shot 1 to 4 and 6 :";
+u=getche();
+u-=48;
+//cout<<endl;
+
+
+if(u==(-21))
+{
+cout<<"\a\nIInvalid Shot ! ";
+continue;
+}
+else
+    if((u>6)||(u<=0)||(u==5))
+{
+cout<<"\a\nInvalid Shot ! ";
+continue;
+}
+c=rand()%5;
+switch(c)
+{
+case 0 : c=1 ;break;
+case 1 : c=2 ;break;
+case 2 : c=3 ;break;
+case 3 : c=4 ;break;
+case 4 : c=6 ;break;
+}
+
+if(u!=c)
+{
+us+=u;
+if(us>cs)
+{
+cout<<"\n\nYou score "<<u<<" Runs ";
+cout<<"\n\nYour Total score : "<<us<<" Runs ! ";
+cout<<"\a\n\n\t\t\t*** You Win !! ***";
+delay(4000);
+break;
+}
+cout<<"\nYou score "<<u<<" Runs ";
+cout<<"\n\nYou Need "<<(cs-us)+1<<" Runs To Win ! ";
+}
+else
+{
+cout<<"\n\nYou Are OUT \n\nYour Total score : "<<us<<" Runs ! ";
+//flag=1;
+cout<<"\a\n\n\t\t\t*** Computer Wins !! *** ";
+delay(4000);
+
+}
+
+
+//getch();
+/*if(flag!=0)
+{
+if(us>cs)
+{
+cout<<"\n\n\nYou Win !!";
+break;
+}
+else{
+    cout<<"\n\nComputer Wins!!!!";
+}
+cout<<"\n\nYou Need "<<(cs-us)+1<<" Runs To Win ! ";
+}*/
+}while(u!=c);
+/*if(flag==0)
+{
+flag=1;
+bowl();
+}*/
+
+return us,cs;
+
+}
 
 
 
-   int main()
+int cbowl(int us)
+{
+    delay(2000);
+    system("cls");
+    cout<<"\n\n\t\t\tUser Bowling !";
+  //flag=0;
+//textcolor(2);
+
+delay(2000);
+system("cls");
+
+ srand (time(NULL));
+int u=0,c=0;
+
+
+do
+{
+
+cout<<"\n\nEnter Style 1 to 4 and 6 : ";
+u=getche();
+u-=48;
+//cout<<endl;
+
+if(u==(-21))
+{
+cout<<"\a\nIInvalid Shot ! ";
+continue;
+}
+else
+    if((u>6)||(u<=0)||(u==5))
+{
+cout<<"\a\nInvalid Shot ! ";
+continue;
+}
+c=rand()%5;
+switch(c)
+{
+case 0 : c=1 ;break;
+case 1 : c=2 ;break;
+case 2 : c=3 ;break;
+case 3 : c=4 ;break;
+case 4 : c=6 ;break;
+}
+
+
+if(u!=c)
+{
+//cout<<c<<" "<<cs;
+cs+=c;
+if((cs>us))
+{
+cout<<"\n\nComputer scores "<<c<<" Runs ";
+cout<<"\n\nComputer Total score : "<<cs<<" Runs ! ";
+cout<<"\a\n\n\t\t\t*** Computer Wins !! *** ";
+delay(4000);
+break;
+}
+cout<<"\nComputer scores "<<c<<" Runs ";
+cout<<"\n\nComputer Needs "<<(us-cs)+1<<" Runs To Win ! \n\n";
+}
+else
+{
+  //flag=1;
+  cout<<"\n\nYou Have Bowled Out The Computer \n\nComputer Total score : "<<cs<<" Runs ! ";
+  //bat(cs);
+  cout<<"\a\n\n\t\t\t*** You Win !! ***";
+  delay(4000);
+}
+/*if(flag!=0)
+{
+
+
+}*/
+}while(u!=c);
+//getch();
+
+/*if(flag==0)
+{
+flag=1;
+bat();
+}*/
+return us ,cs;
+
+}
+
+
+
+
+
+ int main()
   {
     int GD=DETECT,GM;
-     us=cs=flag=0;
+     int flag=0;
 
 
 
-initgraph(&GD, &GM,(char*)"");
+
+ initgraph(&GD, &GM,(char*)"");
 
  cleardevice();
 
  setbkcolor(BLACK);
  setcolor(RED);
- settextstyle(9 ,0 ,1);
+ settextstyle(9,0,3);
 
- outtextxy(150,175,(char*)"    ------------------------------");
- outtextxy(150,200,(char*)"    KA SPORTS PRESENTS");
- outtextxy(150,225,(char*)"    ------------------------------");
+ outtextxy(100,175,(char*)"   ----------------------------------");
+ outtextxy(100,200,(char*)"    KA SPORTS PRESENTS");
+ outtextxy(100,225,(char*)"   ----------------------------------");
  delay(4000);
  cleardevice();
  setbkcolor(BLACK);
  setcolor(RED);
- settextstyle(10 ,0 ,1 );
+ settextstyle(10,0,6);
 
- outtextxy(100,100,(char*)" HAND CRICKET ");
- outtextxy(100,115,(char*)" ____________" );
+ outtextxy(90,100,(char*)" HAND CRICKET ");
+ outtextxy(90,140,(char*)" ------------" );
+ settextstyle(10,0,4);
  outtextxy(100,300,(char*)"press ENTER to continue");
   getch();
 
@@ -495,7 +767,7 @@ do{
              }
 		     if(s[1].score>s[0].score)
              {
-
+                cout<<"\n\nTarget Reached";
                 break;
              }
 		   }
@@ -504,7 +776,9 @@ do{
 		   {
 		      flag=1;
 		      cout<<"\nYou got out!!\n";
-		      cout<<"Your score "<<s[i].score<<endl;
+		      cout<<"Your score : "<<s[i].score<<endl;
+		      delay(3000);
+		      system("cls");
 		   }
 
 		 else
@@ -513,8 +787,11 @@ do{
 
 
 		     cout<<"\nINVALID entry you got out\n";
-		     cout<<"Your score "<<s[i].score<<endl;
+		     cout<<"Your score : "<<s[i].score<<endl;
 		     flag=1;
+		     delay(4000);
+		     system("cls");
+
 		   }
 		   else{
             cout<<"Error";
@@ -525,10 +802,12 @@ do{
 
 	   if(s[0].score>s[1].score)
 	     {
-	     cout<<s[0].name<<" wins\n";
-	     cout<<s[0].name<<"'s score \n"
+         system("cls");
+	     cout<<endl;
+	     cout<<s[0].name<<" wins\n\n";
+	     cout<<s[0].name<<"'s score : "
 		 <<s[0].score<<endl;
-	     cout<<s[1].name<<"'s score\n"
+	     cout<<s[1].name<<"'s score : "
 		 <<s[1].score<<endl;
 	     }
 	   else
@@ -543,10 +822,11 @@ do{
 
 	   else
 	   {
-	   cout<<s[1].name<<" wins\n";
-	   cout<<s[1].name<<"'s score\n"
+       cout<<endl;
+	   cout<<s[1].name<<" wins\n\n";
+	   cout<<s[1].name<<"'s score : "
 	       <<s[1].score<<endl;
-	   cout<<s[0].name<<"'s score \n"
+	   cout<<s[0].name<<"'s score : "
 	       <<s[0].score<<endl;
 	     }
        }
@@ -554,7 +834,7 @@ do{
 		 break;
 
 	case 2:
-	     system("cls");
+	      system("cls");
 	      play();
 	      goto st;
 	      break;
@@ -671,6 +951,11 @@ do{
 
 
     case 4:
+    cleardevice() ;
+    settextstyle(3,0,6);
+    cout<<"\a";
+    outtextxy(95,200,(char*)"*** Thank You ***");
+    delay(4000);
 	exit(0);
 	   break;
 
